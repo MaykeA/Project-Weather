@@ -30,7 +30,7 @@ export class CurrentWeatherComponent implements OnInit {
     this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.datetime, resp.weather.description, resp.wind, resp.moisture)
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh)
     })
   }
 
@@ -40,7 +40,7 @@ export class CurrentWeatherComponent implements OnInit {
     this.weatherApi.getWeather(cidade, this.city).subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.datetime, resp.weather.description, resp.wind, resp.moisture)
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh)
       console.log(this.weatherData)
     })
   }

@@ -13,7 +13,7 @@ export class TodayWeatherComponent implements OnInit {
 
   model: Model[]
   
-  @Input() weatherDatas: Array<any>;
+  @Input() weatherDatas;
 
   ngOnInit(): void {
   }

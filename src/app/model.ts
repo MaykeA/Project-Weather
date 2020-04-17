@@ -1,17 +1,15 @@
 export class Model{
     public temperature: number;
     public city: string;
-    public date: string;
     public description: string;
     public wind:number;
-    public moisture:number;
+    public humidity:number;
 
-    constructor(temperature: number, city: string, date: string, description: string, wind:number, rh:number){
+    constructor(temperature: number, city: string, description: string, wind:number, humidity: number){
         this.temperature = temperature;    
         this.city = city;    
-        this.date = date;    
         this.description = description;    
         this.wind = wind;
-        this.moisture = rh;
+        this.humidity = humidity;
     }
 }

@@ -3,6 +3,7 @@
     <div class="img-current-icon">
       <img class="current-icon" src="../../assets/animated/cloudy-day-1.svg" alt="cloudy">
     </div>
+    <span class="text-current-city">{{ weatherData.city }}</span>
     <span class="text-current-weather">{{ weatherData.description | titlecase }}</span>
     <span class="number-current-weather">{{ weatherData.temperature }}˚</span>
 </div>
@@ -13,8 +14,9 @@
 
     </form>
   </div>
-  <p class="citySearch">Clima hoje em: {{ weatherData.city | titlecase }}</p>
-  <p>{{ weatherData.wind }}</p>
-  <p>{{ weatherData.humidity }}</p>
+  <div class="current-weather">
+    <span class="text-current-wind">{{ weatherData.wind}}</span>
+    <span class="text-current-humidity">{{ weatherData.humidity }}</span>
+  </div>
 </div>
 

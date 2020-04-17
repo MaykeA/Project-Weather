@@ -24,7 +24,6 @@
 .img-current-icon{
   display: flex;
   justify-content: center;
-  margin-top: 10%;
   width: 100%;
 }
 .current-icon {
@@ -32,9 +31,14 @@
   margin: 0;
 }
 
+.text-current-city {
+  font-size: 2vw;
+}
+
 // Descrição //
 .text-current-weather {
-  font-size: 2vw;
+  font-size: 1vw;
+  padding: 5%;
 }
 
 // Temperatura //
@@ -49,8 +53,12 @@
 }
 
 // Velocidade do vento //
-.wind-current-weather {
-  width: 100%;
+.text-current-wind {
+  font-size: 2vw;
+}
+
+.text-current-humidity{
+  font-size: 2vw;
 }
 
 // Conteúdo da div Search //

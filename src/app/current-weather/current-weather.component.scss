@@ -55,7 +55,7 @@
 
 // Conteúdo da div Search //
 .input-city {
-  border: 1px solid #444;
+  
   width: 90%;
 }
 .input-city form{
@@ -78,7 +78,9 @@
   position: absolute;
   padding: 12.5px;
 }
-
+.citySearch {
+  margin-top: 50px;
+}
 // Input de Pesquisa//
 .search {
   width: 13.5%;

@@ -1,0 +1,18 @@
+<router-outlet></router-outlet>
+<div class="main-content">
+  <div class="cloud"></div>
+  <div class="content-weather">
+    <div class="nav-container">
+      <app-nav></app-nav>
+    </div>
+    <div class="current-container mat-element-z4">
+      <app-current-weather #current></app-current-weather>
+    </div>
+    <div class="today-container">
+      <app-today-weather [weatherDatas]="current.weatherData"></app-today-weather>
+    </div>
+    <div class="future-container">
+      <app-future-weather></app-future-weather>
+    </div>
+  </div>
+</div>

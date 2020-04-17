@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="current-weather">
+    <img class="current-icon" src="../../assets/animated/cloudy-day-1.svg" alt="cloudy">
+    <span class="text-current-weather">{{ weatherData.description | titlecase }}</span>
+    <span class="number-current-weather">{{ weatherData.temperature }}˚</span>
+    <span class="moist-current-weather">{{ weatherData.date }}</span>
+  </div>
+  <div class="input-city">
+    <form [formGroup]="formWeather" (ngSubmit)="getCity(formWeather.value)">
+      <input class="txtSearch" name="city" formControlName="city" type="text" value="" placeholder="Digite o que você procura" />
+      <button class="search" type="submit" value=""></button>
+
+    </form>
+  </div>
+  <p class="citySearch">Clima hoje em: {{ weatherData.city | titlecase }}</p>
+</div>

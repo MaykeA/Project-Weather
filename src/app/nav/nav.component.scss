@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 20px 0 20px;
+  height: 100%;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
+.nav-itens {
+  cursor: pointer;
+}
+
+.nav-itens i {
+  font-size: 2.1rem;
+}

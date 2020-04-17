@@ -49,12 +49,8 @@
     z-index: 1;
 }  
 
-.nav-container { 
-  grid-area: 1 / 1 / 2 / 2;
-}
-
 .current-container { 
-  grid-area: 2 / 1 / 7 / 2; 
+  grid-area: 1 / 1 / 7 / 2; 
 }
 
 .today-container { 

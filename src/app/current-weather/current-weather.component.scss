@@ -20,6 +20,13 @@
 }
 
 // Ícone do tempo atual //
+
+.img-current-icon{
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  width: 100%;
+}
 .current-icon {
   width: 50%;
   margin: 0;
@@ -27,12 +34,12 @@
 
 // Descrição //
 .text-current-weather {
-  font-size: 1vw;
+  font-size: 2vw;
 }
 
 // Temperatura //
 .number-current-weather {
-  font-size: 1vw;
+  font-size: 5vw;
   padding: 10%;
 }
 

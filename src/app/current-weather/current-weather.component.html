@@ -1,6 +1,8 @@
 <div class="container">
   <div class="current-weather">
-    <img class="current-icon" src="../../assets/animated/cloudy-day-1.svg" alt="cloudy">
+    <div class="img-current-icon">
+      <img class="current-icon" src="../../assets/animated/cloudy-day-1.svg" alt="cloudy">
+    </div>
     <span class="text-current-weather">{{ weatherData.description | titlecase }}</span>
     <span class="number-current-weather">{{ weatherData.temperature }}˚</span>
 </div>

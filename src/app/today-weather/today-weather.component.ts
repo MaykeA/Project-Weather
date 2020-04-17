@@ -13,11 +13,7 @@ export class TodayWeatherComponent implements OnInit {
 
   model: Model[]
   
-<<<<<<< HEAD
-  @Input() weatherDatas;
-=======
   @Input() weatherDatas
->>>>>>> 42cfcbb77a55e5dc964c27caf59aded18025ab78
 
   ngOnInit(): void {
   }

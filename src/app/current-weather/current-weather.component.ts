@@ -12,36 +12,42 @@ export class CurrentWeatherComponent implements OnInit {
 
   formWeather: any;
   city: any;
+  valor:string;
 
   infoApi: any;
   model: Model[]
   weatherData
+  hora
+  
 
   constructor(private weatherApi: SearchWeatherService) { }
 
   ngOnInit() {
-    let cidade = 'city='
-    this.formWeather = new FormGroup({
-      city: new FormControl("", Validators.compose([
-        Validators.required
-      ]))
-    })
-
-    this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
-      this.infoApi = resposta;
-      let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh)
-    })
+    let data = new Date()
+    this.hora = data.getTime()
+    
+    
+    // this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
+    //   this.infoApi = resposta;
+    //   let resp = this.infoApi.data[0];
+    //   this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
+    //     resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+    // })
   }
 
-  getCity(dataName) {
-    this.city = dataName.city;
-    let cidade = 'city='
-    this.weatherApi.getWeather(cidade, this.city).subscribe((resposta) => {
+  saveValue(event){
+    this.valor = String(event.target.value)
+  }
+
+  getCity(event) {
+    this.weatherApi.getWeather(this.valor).subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh)
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, 
+        resp.rh, resp.sunrise, resp.sunset)
       console.log(this.weatherData)
+      
+      
     })
   }
 }

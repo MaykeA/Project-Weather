@@ -7,7 +7,7 @@
   height: 100%;
   box-shadow: 5px 0 5px -5px #333;
   color: #fff;
-  font: 300 1.2vw Roboto;
+  font: 300 1.2vw sans-serif;
 }
 
 // Conteúdo do current-weather //
@@ -17,6 +17,13 @@
   align-items: center;
   height: 60%;
   width: 100%;
+}
+
+// Conteúdo da Listaa //
+.current-weather-list {
+  display: inline-block;
+  width: 90%;
+  height: 25%;
 }
 
 // Ícone do tempo atual //
@@ -31,20 +38,48 @@
   margin: 0;
 }
 
+.current-wind-icon {
+  width: 10%;
+}
+
+.current-humidity-icon {
+  width: 10%;
+}
+
+.current-sunrise-icon {
+  width: 10%;
+}
+
+.current-sunset-icon {
+  width: 10%;
+}
+
 .text-current-city {
-  font-size: 2vw;
+  font-size: 3vw;
 }
 
 // Descrição //
 .text-current-weather {
-  font-size: 1vw;
+  font-size: 2vw;
   padding: 5%;
+}
+
+.text-current-sunrise {
+  display: inline-block;
+  font-size: 1.5vw;
+  padding: 1.5%;
+}
+
+.text-current-sunset {
+  display: inline-block;
+  font-size: 1.5vw;
+  padding: 1.5%;
 }
 
 // Temperatura //
 .number-current-weather {
   font-size: 5vw;
-  padding: 10%;
+  
 }
 
 // umidade //
@@ -54,62 +89,72 @@
 
 // Velocidade do vento //
 .text-current-wind {
-  font-size: 2vw;
-}
-
-.text-current-humidity{
-  font-size: 2vw;
-}
-
-// Conteúdo da div Search //
-.input-city {
-  border: 1px solid #444;
-  width: 90%;
-}
-.input-city form{
-  width: 100%;
-}
-
-.input-city input {
   display: inline-block;
-  width: 81%;
-  outline: 0;
-  border: 0;
-  padding: 5px;
+  font-size: 1.5vw;
+  padding: 1.5%;
 }
-
-.input-city button {
-  color: #fff;
-  width: 2.5%;
-  font-weight: bold;
-  border: none;
-  position: absolute;
-  padding: 12.5px;
+// Porcentagem de Humidade //
+.text-current-humidity{
+  display: inline-block;
+  font-size: 1.5vw;
+  padding: 1.5;
 }
 
 // Input de Pesquisa//
-.search {
-  width: 13.5%;
-  padding: 5%;
-  background-color: #fff;
-  background-image: url(../../assets/fav-icon/search.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  outline: none;
-}
 
-.search:hover,
-.search:focus {
-  cursor: pointer;
-  filter: invert(10%);
-  outline: none;
-}
-
-.search:active {
-  outline: none;
-}
-
-.search img {
+.input-city{
+  margin-top: 5%;
+  display: flex;
+  box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  height: 8%;
+  color: white;
+  box-shadow: 5px 0 5px -5px #333
+}
+
+.input-city input[type=text]{
+  padding: 3%;
+  font-size: 15px;
+  border: none;
+  float: left;
+  width: 75%;
+  background-color: rgba(0, 0, 0, 0.185);
+  color: white;
+}
+
+.input-city button{
+  float: left;
+  width: 20%;
+  padding: 5%;
+  background: rgba(0, 0, 0, 0.185);
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  
+}
+
+.input-city button:hover{
+  background: #0b7dda;
+}
+
+.input-city::after{
+  content: "";
+  clear: both;
+  display: table;
+}
+
+input:focus{
+  outline:none;
+}
+
+button:focus{
+  outline:none;
+}
+
+::placeholder{
+  color:white;
+}
+
+i{
+  color:white;
 }

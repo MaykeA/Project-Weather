@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="container">
   <div class="current-weather">
     <div class="img-current-icon">
@@ -6,17 +7,15 @@
     <span class="text-current-city">{{ weatherData.city }}</span>
     <span class="text-current-weather">{{ weatherData.description | titlecase }}</span>
     <span class="number-current-weather">{{ weatherData.temperature }}˚</span>
-</div>
+  </div>
+  <div class="current-weather-list">
+    <span class="text-current-wind"><img class="current-wind-icon" src="../../assets/static/wind.svg"> Vento: {{ weatherData.wind  | number:'1.0-2' }} KM/h </span>
+    <span class="text-current-humidity"><img class="current-humidity-icon" src="../../assets/static/drop.svg"> Umidade: {{ weatherData.humidity }}%</span>
+    <span class="text-current-sunrise"><img class="current-sunrise-icon" src="../../assets/static/sun.svg"> Nascer do Sol: {{ weatherData.sunrise }} </span>
+    <span class="text-current-sunset"><img class="current-sunset-icon" src="../../assets/static/sunset.svg"> Pôr do Sol: {{ weatherData.sunset }}</span>
+  </div>
   <div class="input-city">
-    <form [formGroup]="formWeather" (ngSubmit)="getCity(formWeather.value)">
-      <input class="txtSearch" name="city" formControlName="city" type="text" value="" placeholder="Digite o que você procura" />
-      <button class="search" type="submit" value=""></button>
-
-    </form>
-  </div>
-  <div class="current-weather">
-    <span class="text-current-wind">{{ weatherData.wind}}</span>
-    <span class="text-current-humidity">{{ weatherData.humidity }}</span>
-  </div>
+    <input class="txtSearch" type="text" (change)="saveValue($event)" placeholder="Digite sua Cidade" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite sua Cidade'"/>
+    <button class="search" (click)="getCity($event)" type="submit" value="Seach"><i class="fa fa-search"></i></button>
+    </div> 
 </div>
-

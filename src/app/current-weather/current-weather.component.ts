@@ -17,22 +17,16 @@ export class CurrentWeatherComponent implements OnInit {
   infoApi: any;
   model: Model[]
   weatherData
-  hora
+  
+  hora:any
+  data:any
   
 
   constructor(private weatherApi: SearchWeatherService) { }
 
   ngOnInit() {
-    let data = new Date()
-    this.hora = data.getTime()
-    
-    
-    // this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
-    //   this.infoApi = resposta;
-    //   let resp = this.infoApi.data[0];
-    //   this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
-    //     resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
-    // })
+    this.data = new Date()
+    this.hora = this.data.getTime()
   }
 
   saveValue(event){
@@ -51,3 +45,11 @@ export class CurrentWeatherComponent implements OnInit {
     })
   }
 }
+
+
+// this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
+    //   this.infoApi = resposta;
+    //   let resp = this.infoApi.data[0];
+    //   this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
+    //     resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+    // })

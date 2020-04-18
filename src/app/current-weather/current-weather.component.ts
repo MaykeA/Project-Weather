@@ -48,14 +48,22 @@ export class CurrentWeatherComponent implements OnInit {
         resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
         console.log(resp.city_name)
     })
-          //retornando nome da cidade de acordo com o array do obj
         })
-      })
+      }, this.showError)
     }
-    
-    console.log(this.city);
   }
 
+
+  showError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert('Usuário rejeitou a solicitação de Geolocalização')
+        alert('Por favor insira um endereço ou nome de cidade')
+        break;
+    }
+  }
+  
+  
   saveValue(event) {
     this.valor = event.target.value
   }
@@ -70,6 +78,8 @@ export class CurrentWeatherComponent implements OnInit {
     })
   }
 }
+
+
 
 
 // this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {

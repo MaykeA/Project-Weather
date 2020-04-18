@@ -19,6 +19,7 @@ export class SearchWeatherService {
 
   getWeather(searchValue): Observable<Model[]>{
     //retornando agora
+    console.log(this.baseUrl+this.cityComplement+`${searchValue}&${this.key}`);
     return this.apiUrl.get<Model[]>(this.baseUrl+this.cityComplement+`${searchValue}&${this.key}`)
   }
 

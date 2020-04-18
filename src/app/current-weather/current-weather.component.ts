@@ -1,7 +1,8 @@
-import { Component, OnInit} from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { SearchWeatherService } from '../search-weather.service';
+import { GeolocationService } from '../geolocation.service';
 import { Model } from '../model';
+
 
 @Component({
   selector: 'app-current-weather',
@@ -12,42 +13,50 @@ export class CurrentWeatherComponent implements OnInit {
 
   formWeather: any;
   city: any;
-  valor:string;
+  valor: string;
 
   infoApi: any;
+
+  geo: any;
   model: Model[]
   weatherData
   hora
-  
-
-  constructor(private weatherApi: SearchWeatherService) { }
+  key = ''
+  constructor(private weatherApi: SearchWeatherService, private locale: GeolocationService) { }
 
   ngOnInit() {
     let data = new Date()
     this.hora = data.getTime()
+
     
     
-    // this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
-    //   this.infoApi = resposta;
-    //   let resp = this.infoApi.data[0];
-    //   this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
-    //     resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
-    // })
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        //Recebe a localização do objeto usando o getCurrentPosition //
+        this.locale.geoLoc(position.coords.latitude, position.coords.longitude).subscribe((result) => {
+          //Usando subscribe para retornar o objeto usando as coordenadas retornadas do objeto position //
+          this.geo = result;
+          let cityName = this.geo.results[0].address_components[3].long_name
+          this.city = cityName
+          //retornando nome da cidade de acordo com o array do obj
+        })
+      })
+    }
+    
+    console.log(this.city);
   }
 
-  saveValue(event){
-    this.valor = String(event.target.value)
+  saveValue(event) {
+    this.valor = event.target.value
   }
 
   getCity(event) {
     this.weatherApi.getWeather(this.valor).subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, 
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
         resp.rh, resp.sunrise, resp.sunset)
       console.log(this.weatherData)
-      
-      
     })
   }
 }

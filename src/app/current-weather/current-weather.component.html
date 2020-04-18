@@ -9,13 +9,19 @@
     <span class="number-current-weather">{{ weatherData.temperature }}˚</span>
   </div>
   <div class="current-weather-list">
-    <span class="text-current-wind"><img class="current-wind-icon" src="../../assets/static/wind.svg"> Vento: {{ weatherData.wind  | number:'1.0-2' }} KM/h </span>
-    <span class="text-current-humidity"><img class="current-humidity-icon" src="../../assets/static/drop.svg"> Umidade: {{ weatherData.humidity }}%</span>
-    <span class="text-current-sunrise"><img class="current-sunrise-icon" src="../../assets/static/sun.svg"> Nascer do Sol: {{ weatherData.sunrise }} </span>
-    <span class="text-current-sunset"><img class="current-sunset-icon" src="../../assets/static/sunset.svg"> Pôr do Sol: {{ weatherData.sunset }}</span>
+    <span class="text-current-wind"><img class="current-wind-icon" src="../../assets/static/wind.svg"> Vento:
+      {{ weatherData.wind  | number:'1.0-2' }} KM/h </span>
+    <span class="text-current-humidity"><img class="current-humidity-icon" src="../../assets/static/drop.svg"> Umidade:
+      {{ weatherData.humidity }}%</span>
+    <span class="text-current-sunrise"><img class="current-sunrise-icon" src="../../assets/static/sun.svg"> Nascer do
+      Sol: {{ weatherData.sunrise }} </span>
+    <span class="text-current-sunset"><img class="current-sunset-icon" src="../../assets/static/sunset.svg"> Pôr do Sol:
+      {{ weatherData.sunset }}</span>
+
   </div>
   <div class="input-city">
-    <input class="txtSearch" type="text" (change)="saveValue($event)" placeholder="Digite sua Cidade" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite sua Cidade'"/>
+    <input class="txtSearch" type="text" (change)="saveValue($event)" placeholder="Digite sua Cidade"
+      onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite sua Cidade'" />
     <button class="search" (click)="getCity($event)" type="submit" value="Seach"><i class="fa fa-search"></i></button>
-    </div> 
+  </div>
 </div>

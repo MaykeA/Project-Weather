@@ -11,7 +11,6 @@ import { Model } from '../model';
 })
 export class CurrentWeatherComponent implements OnInit {
 
-  formWeather: any;
   city: any;
   valor: string;
 
@@ -28,9 +27,7 @@ export class CurrentWeatherComponent implements OnInit {
     let data = new Date()
     this.hora = data.getTime()
 
-    
-    
-    if ('geolocation' in navigator) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         //Recebe a localização do objeto usando o getCurrentPosition //
         this.locale.geoLoc(position.coords.latitude, position.coords.longitude).subscribe((result) => {
@@ -42,13 +39,14 @@ export class CurrentWeatherComponent implements OnInit {
         })
       })
     }
-    
-    console.log(this.city);
+    console.log(this.geo.results[0].address_components[3].long_name);
+    console.log(this.valor);
   }
 
   saveValue(event) {
     this.valor = event.target.value
   }
+
 
   getCity(event) {
     this.weatherApi.getWeather(this.valor).subscribe((resposta) => {
@@ -60,7 +58,6 @@ export class CurrentWeatherComponent implements OnInit {
     })
   }
 }
-
 
 // this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
     //   this.infoApi = resposta;

@@ -12,6 +12,7 @@ import { Model } from '../model';
 export class CurrentWeatherComponent implements OnInit {
 
   city: any;
+  cityName:any
   valor: string;
 
   infoApi: any;
@@ -32,9 +33,18 @@ export class CurrentWeatherComponent implements OnInit {
         //Recebe a localização do objeto usando o getCurrentPosition //
         this.locale.geoLoc(position.coords.latitude, position.coords.longitude).subscribe((result) => {
           //Usando subscribe para retornar o objeto usando as coordenadas retornadas do objeto position //
-          this.geo = result;
-          let cityName = this.geo.results[0].address_components[3].long_name
-          this.city = cityName
+        this.geo = result;
+        this.city = this.geo.results[0].address_components[3].long_name
+        this.cityName = this.city
+        console.log(this.cityName)
+
+      this.weatherApi.getWeather(this.cityName).subscribe((resposta) => {
+      this.infoApi = resposta;
+      let resp = this.infoApi.data[0];
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
+        resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+        console.log(resp.city_name)
+    })
           //retornando nome da cidade de acordo com o array do obj
         })
       })

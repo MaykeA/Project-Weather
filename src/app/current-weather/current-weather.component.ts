@@ -10,7 +10,6 @@ import { Model } from '../model';
 })
 export class CurrentWeatherComponent implements OnInit {
 
-
   cityName: any
   valor: string;
   geo: any;
@@ -30,10 +29,6 @@ export class CurrentWeatherComponent implements OnInit {
     let data = new Date()
     this.hora = data.getTime()
 
-    this.geoLocale()
-  }
-
-  geoLocale(){
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.locale.geoLoc(position.coords.latitude, position.coords.longitude).subscribe((result) => {
@@ -44,30 +39,56 @@ export class CurrentWeatherComponent implements OnInit {
         })
       }, this.showError)
     }
+
   }
 
+  // geoLocale() {
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       this.locale.geoLoc(position.coords.latitude, position.coords.longitude).subscribe((result) => {
+  //         this.geo = result;
+  //         let city = this.geo.results[0].address_components[3].long_name
+  //         this.cityName = city
+  //         this.getCity(event);
+  //       })
+  //     }, this.showError)
+  //   }
+  // }
+
   showError(error) {
-    if (error.PERMISSION_DENIED){
-        alert('Usuário rejeitou a solicitação de Geolocalização')
-        alert('Por favor insira um CEP ou nome de uma cidade')  
+    if (error.PERMISSION_DENIED) {
+      alert('Usuário rejeitou a solicitação de Geolocalização')
+      alert('Por favor insira um CEP ou nome de uma cidade')
     }
   }
 
-  @Output() emitirCidade = new EventEmitter()
+  // saveValue(event){
+  //   this.valor = event.target.value
+  // }
 
-  
-  onMudouCidade(event) {
-    console.log(this.emitirCidade);
+  // getCity(event) {
+  //   this.weatherApi.getWeather(this.cityName).subscribe((resposta) => {
+  //     this.infoApi = resposta;
+  //     let resp = this.infoApi.data[0];
+  //     this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+      
+  //   })
+  // }
+
+
+  saveValue(event) {
+    this.cityName = event.target.value
   }
 
   getCity(event) {
     this.weatherApi.getWeather(this.cityName).subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
-      console.log(this.cityName);
-      this.emitirCidade = this.cityName
-      console.log(this.emitirCidade);
+      console.log(resp);
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
+      resp.rh, resp.sunrise, resp.sunset)
+      console.log(this.weatherData)
     })
   }
+
 }

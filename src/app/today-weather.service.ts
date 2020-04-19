@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class TodayWeatherService {
 
+  morn = '06'
+  after = '13'
+  night = '19'
+
   constructor(private todayApi: HttpClient) { }
 
 
@@ -15,7 +19,15 @@ export class TodayWeatherService {
 
   private todayKey = 'b82c610ef5a14f3aad5a1e81c9c137ad'
 
- todayHour(city, morn,after,nigth): Observable<ModelToday[]> {
-  return this.todayApi.get<ModelToday[]>(this.baseUrl + `${city}&Country=BR&start_date=2020-04-18:${morn}&end_date=2020-04-19&key=${this.todayKey}`)
-}
+ mornHour(city): Observable<ModelToday[]> {
+  return this.todayApi.get<ModelToday[]>(this.baseUrl + `${city}&Country=BR&start_date=2020-04-18:${this.morn}&end_date=2020-04-19&key=${this.todayKey}`)
+  }
+
+  afterHour(city): Observable<ModelToday[]> {
+    return this.todayApi.get<ModelToday[]>(this.baseUrl + `${city}&Country=BR&start_date=2020-04-18:${this.after}&end_date=2020-04-19&key=${this.todayKey}`)
+  }
+
+  nightHour(city): Observable<ModelToday[]> {
+    return this.todayApi.get<ModelToday[]>(this.baseUrl + `${city}&Country=BR&start_date=2020-04-18:${this.night}&end_date=2020-04-19&key=${this.todayKey}`)
+  }
 }

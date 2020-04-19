@@ -13,6 +13,12 @@ export class TodayWeatherComponent implements OnInit {
   
   @Input() status
 
+  @Input() morning
+
+  @Input() after
+
+  @Input() night
+
   constructor(private today:TodayWeatherService) { }
   
    ngOnInit(){

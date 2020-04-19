@@ -4,5 +4,6 @@ export class ModelToday{
 
     constructor(temperature: number){
         this.temperature = temperature;    
+        
        }
 }

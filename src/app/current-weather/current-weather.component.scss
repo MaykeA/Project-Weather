@@ -77,6 +77,16 @@
   padding: 1.5%;
 }
 
+.text-current-humidity{
+  display: inline-block;
+  font-size: 1.5vw;
+  padding: 1.5;
+}
+.text-current-wind {
+  display: inline-block;
+  font-size: 1.5vw;
+  padding: 1.5%;
+}
 // Temperatura //
 .number-current-weather {
   font-size: 5vw;
@@ -89,17 +99,7 @@
 }
 
 // Velocidade do vento //
-.text-current-wind {
-  display: inline-block;
-  font-size: 1.5vw;
-  padding: 1.5%;
-}
 // Porcentagem de Humidade //
-.text-current-humidity{
-  display: inline-block;
-  font-size: 1.5vw;
-  padding: 1.5;
-}
 
 // Input de Pesquisa//
 

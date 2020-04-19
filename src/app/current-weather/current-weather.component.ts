@@ -20,15 +20,11 @@ export class CurrentWeatherComponent implements OnInit {
   
   infoApi: any;
   weatherData
-
-
-  morn = '06'
-  after = '13'
-  night = '19'
-
-  
+    
   todayApi
   morning
+  aft
+  ngt
 
   weekApi
   weekData
@@ -51,7 +47,7 @@ export class CurrentWeatherComponent implements OnInit {
           this.geo = result;
           this.cityName = this.geo.results[0].address_components[3].long_name
           this.getCity(event);
-          this.showToday();
+          this.showMorning();
         })
       }, this.showError)
     }
@@ -74,13 +70,14 @@ export class CurrentWeatherComponent implements OnInit {
       let resp = this.infoApi.data[0];
       this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
         resp.rh, resp.sunrise, resp.sunset)
-      this.showToday()
-      this.showWeek()
+      this.showMorning() 
+      this.showAfter()
+      this.showNight()
     })
   }
   // Altera dados do componente irmão
-  showToday() {
-    this.today.todayHour(this.cityName, this.night).subscribe((resposta) => {
+  showMorning() {
+    this.today.mornHour(this.cityName).subscribe((resposta) => {
       this.todayApi = resposta;
       let resp = this.todayApi.data[0];
       this.morning = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
@@ -98,9 +95,19 @@ export class CurrentWeatherComponent implements OnInit {
     })
   }
 
+  showAfter() {
+    this.today.afterHour(this.cityName).subscribe((resposta) => {
+      this.todayApi = resposta;
+      let resp = this.todayApi.data[0];
+      this.aft = new ModelToday(resp.temp)
+    })
+  }
 
-
-
-
-  
+  showNight() {
+    this.today.nightHour(this.cityName).subscribe((resposta) => {
+      this.todayApi = resposta;
+      let resp = this.todayApi.data[0];
+      this.ngt = new ModelToday(resp.temp)
+    })
+  }
 }

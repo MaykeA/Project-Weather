@@ -23,8 +23,10 @@
     </span>
   </div>
   <div class="input-city">
-    <input class="txtSearch" type="text" placeholder="Digite sua Cidade"
+    <input class="txtSearch" type="text" placeholder="Digite sua Cidade" (change)="saveValue($event)"
       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Digite sua Cidade'" />
     <button class="search" (click)="getCity($event)" type="submit" value="Search"><i class="fa fa-search"></i></button>
   </div>
 </div>
+<p>{{morning.temperature}}</p>
+<p>{{morning}}</p>

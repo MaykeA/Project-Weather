@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SearchWeatherService } from '../search-weather.service';
+import { TodayWeatherService } from '../today-weather.service';
 import { Model } from '../model';
 
 @Component({
@@ -8,14 +8,24 @@ import { Model } from '../model';
   styleUrls: ['./today-weather.component.scss']
 })
 export class TodayWeatherComponent implements OnInit {
-
-  constructor(private weatherApi: SearchWeatherService) { }
-
-  model: Model[]
   
-  @Input() weatherDatas
+  @Input() acessaWeatherData
+  @Input() acessaCity
 
-  ngOnInit(): void {
+  todayApi
+  todayInfo
+  xD = this.acessaCity
+  morning
+
+  constructor(private today:TodayWeatherService) { }
+
+  // cityName = 
+  
+   ngOnInit(){
+      this.today.todayHour(this.xD).subscribe((resposta) => {
+      this.todayApi = resposta;
+      this.morning = this.todayApi.data[0];
+      console.log(this.morning.temp)
+    })
   }
-  
 }

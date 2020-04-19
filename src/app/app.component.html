@@ -21,14 +21,16 @@
     </div>
   </div>
   <div class="content-weather">
-    <div class="current-container mat-element-z4">
+    <div class="current-container">
       <app-current-weather #current></app-current-weather>
     </div>
     <div class="today-container">
-      <app-today-weather [weatherDatas]="current.weatherData"></app-today-weather>
+      <app-today-weather [acessaWeatherData]="current.weatherData" [acessaCity]="current.cityName"></app-today-weather>
     </div>
     <div class="future-container">
       <app-future-weather></app-future-weather>
     </div>
   </div>
 </div>
+
+<!-- (emitirCidade)="onMudouCidade($event) -->

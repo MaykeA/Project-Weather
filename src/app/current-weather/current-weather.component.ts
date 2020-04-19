@@ -79,4 +79,5 @@ export class CurrentWeatherComponent implements OnInit {
       this.morning = new ModelToday(resp.temp)
     })
   }
+  
 }

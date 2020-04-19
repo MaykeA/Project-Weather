@@ -15,7 +15,7 @@ export class TodayWeatherService {
 
   private todayKey = 'b82c610ef5a14f3aad5a1e81c9c137ad'
 
- todayHour(city, morn,after,nigth): Observable<ModelToday[]> {
+ todayHour(city, morn): Observable<ModelToday[]> {
   return this.todayApi.get<ModelToday[]>(this.baseUrl + `${city}&Country=BR&start_date=2020-04-18:${morn}&end_date=2020-04-19&key=${this.todayKey}`)
 }
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SearchWeatherService } from '../search-weather.service';
 import { GeolocationService } from '../geolocation.service';
 import { Model } from '../model';
 import { TodayWeatherService } from '../today-weather.service';
 import { ModelToday } from '../today-model';
+import { DaysWeatherService } from '../days-weather.service';
 
 @Component({
   selector: 'app-current-weather',
@@ -11,25 +12,30 @@ import { ModelToday } from '../today-model';
   styleUrls: ['./current-weather.component.scss']
 })
 export class CurrentWeatherComponent implements OnInit {
+  hora
+  model: Model[]
 
   geo: any;//recebe o objeto
   cityName: any//recebe o nome da cidade do objeto
-
+  
+  infoApi: any;
   weatherData
-  model: Model[]
 
-  hora
 
   morn = '06'
   after = '13'
   night = '19'
 
-  infoApi: any;
   
   todayApi
   morning
 
-  constructor(private weatherApi: SearchWeatherService, private locale: GeolocationService, private today: TodayWeatherService) { }
+  weekApi
+  weekData
+  initialDate = '2020-04-19'
+  finalDate = '2020-04-20'
+
+  constructor(private weatherApi: SearchWeatherService, private locale: GeolocationService, private today: TodayWeatherService, private week:DaysWeatherService) { }
 
   ngOnInit() {
     let data = new Date()
@@ -68,7 +74,8 @@ export class CurrentWeatherComponent implements OnInit {
       let resp = this.infoApi.data[0];
       this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
         resp.rh, resp.sunrise, resp.sunset)
-      this.showToday() 
+      this.showToday()
+      this.showWeek()
     })
   }
   // Altera dados do componente irmão
@@ -76,8 +83,24 @@ export class CurrentWeatherComponent implements OnInit {
     this.today.todayHour(this.cityName, this.night).subscribe((resposta) => {
       this.todayApi = resposta;
       let resp = this.todayApi.data[0];
-      this.morning = new ModelToday(resp.temp)
+      this.morning = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
+        resp.rh, resp.sunrise, resp.sunset)
     })
   }
+
+  showWeek() {
+    this.week.fDayWeek(this.cityName, this.initialDate, this.finalDate).subscribe((resposta) => {
+      this.weekApi = resposta;
+      let resp = this.todayApi.data[0];
+      this.weekData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
+        resp.rh, resp.sunrise, resp.sunset)
+      console.log(this.weekData.temperature);
+    })
+  }
+
+
+
+
+
   
 }

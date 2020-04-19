@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SearchWeatherService } from '../search-weather.service';
 import { GeolocationService } from '../geolocation.service';
 import { Model } from '../model';
-
 
 @Component({
   selector: 'app-current-weather',
@@ -11,80 +10,64 @@ import { Model } from '../model';
 })
 export class CurrentWeatherComponent implements OnInit {
 
-  formWeather: any;
-  city: any;
-  cityName:any
+
+  cityName: any
   valor: string;
-
-  infoApi: any;
-
   geo: any;
-  model: Model[]
+
   weatherData
+  infoApi: any;
+  model: Model[]
+
   hora
-  key = ''
+
+  todayInfo
+  todayApi
+
   constructor(private weatherApi: SearchWeatherService, private locale: GeolocationService) { }
 
   ngOnInit() {
     let data = new Date()
     this.hora = data.getTime()
 
-    
-    
+    this.geoLocale()
+  }
+
+  geoLocale(){
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        //Recebe a localização do objeto usando o getCurrentPosition //
         this.locale.geoLoc(position.coords.latitude, position.coords.longitude).subscribe((result) => {
-          //Usando subscribe para retornar o objeto usando as coordenadas retornadas do objeto position //
-        this.geo = result;
-        this.city = this.geo.results[0].address_components[3].long_name
-        this.cityName = this.city
-        console.log(this.cityName)
-
-      this.weatherApi.getWeather(this.cityName).subscribe((resposta) => {
-      this.infoApi = resposta;
-      let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
-        resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
-        console.log(resp.city_name)
-    })
+          this.geo = result;
+          let city = this.geo.results[0].address_components[3].long_name
+          this.cityName = city
+          this.getCity(event);
         })
       }, this.showError)
     }
   }
 
-
   showError(error) {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
+    if (error.PERMISSION_DENIED){
         alert('Usuário rejeitou a solicitação de Geolocalização')
-        alert('Por favor insira um endereço ou nome de cidade')
-        break;
+        alert('Por favor insira um CEP ou nome de uma cidade')  
     }
   }
+
+  @Output() emitirCidade = new EventEmitter()
+
   
-  
-  saveValue(event) {
-    this.valor = event.target.value
+  onMudouCidade(event) {
+    console.log(this.emitirCidade);
   }
 
   getCity(event) {
-    this.weatherApi.getWeather(this.valor).subscribe((resposta) => {
+    this.weatherApi.getWeather(this.cityName).subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
-        resp.rh, resp.sunrise, resp.sunset)
-      console.log(this.weatherData)
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+      console.log(this.cityName);
+      this.emitirCidade = this.cityName
+      console.log(this.emitirCidade);
     })
   }
 }
-
-
-
-
-// this.weatherApi.getWeather(cidade, "São Paulo").subscribe((resposta) => {
-    //   this.infoApi = resposta;
-    //   let resp = this.infoApi.data[0];
-    //   this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, 
-    //     resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
-    // })

@@ -11,20 +11,10 @@ import { CurrentWeatherComponent } from '../current-weather/current-weather.comp
 
 export class TodayWeatherComponent implements OnInit {
   
-  @Input() acessaWeatherData
-  
-  todayApi
-  todayInfo  
-  nomeDaCidade = 'São Paulo'
-  morning
+  @Input() status
 
   constructor(private today:TodayWeatherService) { }
   
    ngOnInit(){
-      this.today.todayHour(this.nomeDaCidade).subscribe((resposta) => {
-      this.todayApi = resposta;
-      this.morning = this.todayApi.data[0];
-      console.log(this.nomeDaCidade);
-    })
   }
 }

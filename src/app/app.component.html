@@ -25,7 +25,7 @@
       <app-current-weather #current></app-current-weather>
     </div>
     <div class="today-container">
-      <app-today-weather [acessaWeatherData]="current.weatherData" ></app-today-weather>
+      <app-today-weather [status]="current.morning"></app-today-weather>
     </div>
     <div class="future-container">
       <app-future-weather></app-future-weather>

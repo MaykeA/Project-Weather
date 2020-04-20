@@ -3,7 +3,6 @@ import { SearchWeatherService } from '../search-weather.service';
 import { GeolocationService } from '../geolocation.service';
 import { Model } from '../model';
 import { TodayWeatherService } from '../today-weather.service';
-import { ModelToday } from '../today-model';
 import { DaysWeatherService } from '../days-weather.service';
 
 @Component({
@@ -17,27 +16,34 @@ export class CurrentWeatherComponent implements OnInit {
 
   geo: any;//recebe o objeto
   cityName: any//recebe o nome da cidade do objeto
-  
+
   infoApi: any;
   weatherData
-    
+
   todayApi
   morning
   aft
   ngt
 
   weekApi
-  weekData
-  initialDate = '2020-04-19'
-  finalDate = '2020-04-20'
+  weeksData1
+  weeksData2
+  weeksData3
 
-  constructor(private weatherApi: SearchWeatherService, private locale: GeolocationService, private today: TodayWeatherService, private week:DaysWeatherService) { }
+
+  constructor(private weatherApi: SearchWeatherService, private locale: GeolocationService, private today: TodayWeatherService, private week: DaysWeatherService) { }
 
   ngOnInit() {
     let data = new Date()
     this.hora = data.getTime()
 
     this.geoLocale();
+    this.showMorning()
+    this.showAfter()
+    this.showNight()
+    this.showDayOne()
+    this.showDayTwo()
+    this.showDayThree()
   }
   // Geolocalização usando API //
   geoLocale() {
@@ -68,46 +74,59 @@ export class CurrentWeatherComponent implements OnInit {
     this.weatherApi.getWeather(this.cityName).subscribe((resposta) => {
       this.infoApi = resposta;
       let resp = this.infoApi.data[0];
-      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
-        resp.rh, resp.sunrise, resp.sunset)
-      this.showMorning() 
+      this.weatherData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+      this.showMorning()
       this.showAfter()
       this.showNight()
+      this.showDayOne()
+      this.showDayTwo()
+      this.showDayThree()
     })
   }
-  // Altera dados do componente irmão
+
+  // Altera dados do componente today//
   showMorning() {
     this.today.mornHour(this.cityName).subscribe((resposta) => {
       this.todayApi = resposta;
       let resp = this.todayApi.data[0];
-      this.morning = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
-        resp.rh, resp.sunrise, resp.sunset)
+      this.morning = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
     })
   }
-
-  showWeek() {
-    this.week.fDayWeek(this.cityName, this.initialDate, this.finalDate).subscribe((resposta) => {
-      this.weekApi = resposta;
-      let resp = this.todayApi.data[0];
-      this.weekData = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd,
-        resp.rh, resp.sunrise, resp.sunset)
-      console.log(this.weekData.temperature);
-    })
-  }
-
   showAfter() {
     this.today.afterHour(this.cityName).subscribe((resposta) => {
       this.todayApi = resposta;
       let resp = this.todayApi.data[0];
-      this.aft = new ModelToday(resp.temp)
+      this.aft = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
     })
   }
-
   showNight() {
     this.today.nightHour(this.cityName).subscribe((resposta) => {
       this.todayApi = resposta;
       let resp = this.todayApi.data[0];
-      this.ngt = new ModelToday(resp.temp)
+      this.ngt = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+    })
+  }
+
+  // Altera dados do Componente Future //
+  showDayOne() {
+    this.week.fDayOne(this.cityName).subscribe((resposta) => {
+      this.weekApi = resposta;
+      let resp = this.todayApi.data[1];
+      this.weeksData1 = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+    })
+  }
+  showDayTwo() {
+    this.week.fDayTwo(this.cityName).subscribe((resposta) => {
+      this.weekApi = resposta;
+      let resp = this.todayApi.data[2];
+      this.weeksData2 = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
+    })
+  }
+  showDayThree() {
+    this.week.fDayThree(this.cityName).subscribe((resposta) => {
+      this.weekApi = resposta;
+      let resp = this.todayApi.data[3];
+      this.weeksData3 = new Model(resp.temp, resp.city_name, resp.weather.description, resp.wind_spd, resp.rh, resp.sunrise, resp.sunset)
     })
   }
 }

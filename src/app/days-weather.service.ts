@@ -11,11 +11,18 @@ export class DaysWeatherService {
 
   constructor(private todayApi: HttpClient) { }
 
-  private baseUrl = 'https://api.weatherbit.io/v2.0/history/daily?city='
-  private weekKey = 'b82c610ef5a14f3aad5a1e81c9c137ad'
+  private baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?city='
+  private weekKey = 'a61705b3be7e460d86cf63927a1dea1b'
 
-  fDayWeek(city, initial, final): Observable<ModelFuture[]> {
-    console.log(this.baseUrl + `${city}&Country=BR&start_date=${initial}&end_date=${final}&key=${this.weekKey}`);
-    return this.todayApi.get<ModelFuture[]>(this.baseUrl + `${city}&Country=BR&start_date=${initial}&end_date=${final}&key=${this.weekKey}`)
+  fDayOne(city): Observable<ModelFuture[]> {
+    return this.todayApi.get<ModelFuture[]>(this.baseUrl + `${city}&Country=BR&key=${this.weekKey}`)
+  }
+
+  fDayTwo(city): Observable<ModelFuture[]> {
+    return this.todayApi.get<ModelFuture[]>(this.baseUrl + `${city}&Country=BR&key=${this.weekKey}`)
+  }
+
+  fDayThree(city): Observable<ModelFuture[]> {
+    return this.todayApi.get<ModelFuture[]>(this.baseUrl + `${city}&Country=BR&key=${this.weekKey}`)
   }
 }

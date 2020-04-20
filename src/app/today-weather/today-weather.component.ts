@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TodayWeatherService } from '../today-weather.service';
-import { Model } from '../model';
-import { CurrentWeatherComponent } from '../current-weather/current-weather.component'
 
 @Component({
   selector: 'app-today-weather',

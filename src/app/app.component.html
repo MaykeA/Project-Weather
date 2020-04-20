@@ -28,9 +28,7 @@
       <app-today-weather [status]="current.morning" [after]="current.aft" [night]="current.ngt"></app-today-weather>
     </div>
     <div class="future-container">
-      <app-future-weather></app-future-weather>
+      <app-future-weather [dayOne]="current.weeksData1" [dayTwo]="current.weeksData2" [dayThree]="current.weeksData3"></app-future-weather>
     </div>
   </div>
 </div>
-
-<!-- (emitirCidade)="onMudouCidade($event) -->

@@ -17,7 +17,7 @@ export class TodayWeatherService {
 
   private baseUrl = 'https://api.weatherbit.io/v2.0/history/hourly?city='
 
-  private todayKey = 'b82c610ef5a14f3aad5a1e81c9c137ad'
+  private todayKey = 'a61705b3be7e460d86cf63927a1dea1b'
 
  mornHour(city): Observable<ModelToday[]> {
   return this.todayApi.get<ModelToday[]>(this.baseUrl + `${city}&Country=BR&start_date=2020-04-18:${this.morn}&end_date=2020-04-19&key=${this.todayKey}`)

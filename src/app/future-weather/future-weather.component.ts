@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-/* import { ModelFuture } from '../app/modelFuture' */
+import { Component, OnInit, Input } from '@angular/core';
+import { DaysWeatherService } from '../days-weather.service';
+
 
 
 @Component({
@@ -9,8 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FutureWeatherComponent implements OnInit {
 
-  constructor() { }
+  @Input() future
+
+  @Input() dayOne
+
+  @Input() dayTwo
+
+  @Input() dayThree
+
+  dia
+  dias
+
+  day1Name = 'Terça'
+  day2Name = 'Quarta'
+  day3Name = 'Quinta'
+
+  constructor(private historical: DaysWeatherService) { }
+
   ngOnInit(): void {
+      
   }
 
 }

@@ -17,7 +17,6 @@ export class SearchWeatherService {
   private key = 'Country=BR&lang=pt&key=b82c610ef5a14f3aad5a1e81c9c137ad'
 
   getWeather(searchValue): Observable<Model[]> {
-    //console.log(this.baseUrl+this.cityComplement+`${searchValue}&${this.key}`);
     return this.apiUrl.get<Model[]>(this.baseUrl + this.cityComplement + `${searchValue}&${this.key}`)
   }
 }

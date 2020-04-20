@@ -3,18 +3,18 @@
         <p class="title">Próximos dias</p>   
     </div>
     <div class="morn">
-        <p class="morn-desc">Sexta</p>
+        <p class="morn-desc">{{day1Name}}</p>
         <img class="morn-icon" src="../../assets/static/day.svg" alt="">
-        <p class="morn-degree">32º</p>
+        <p class="morn-degree">{{ dayOne.temperature }}º</p>
     </div>
     <div class="aftn">
-        <p class="aftn-desc">Sábado</p>
+        <p class="aftn-desc">{{day2Name}}</p>
         <img class="aftn-icon" src="../../assets/static/cloudy-day-3.svg" alt="">
-        <p class="aftn-degree">19º</p>
+        <p class="aftn-degree">{{ dayTwo.temperature }}º</p>
     </div>
     <div class="nign">
-        <p class="nign-desc">Domingo</p>
+        <p class="nign-desc">{{day3Name}}</p>
         <img class="nign-icon" src="../../assets/static/snowy-4.svg" alt="">
-        <p class="nign-degree">15º</p>
+        <p class="nign-degree">{{ dayThree.temperature }}º</p>
     </div>
 </div>
